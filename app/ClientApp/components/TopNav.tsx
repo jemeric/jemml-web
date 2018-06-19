@@ -19,9 +19,18 @@ export class TopNav extends React.Component<{}, {}> {
               </div>
                     <div id="navbar3" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav navbar-right">
-                            <li className="active"><a href="#">Home</a></li>
-                            <li><a href="#">Analysis Builder</a></li>
-                            <li><a href="#">Documentation</a></li>
+                            <li className="active">
+                                <NavLink exact to={'/'} activeClassName='active'>Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink exact to={'/counter'} activeClassName='active'>Analysis Builder</NavLink>
+                            </li>
+                            <li>
+                                <NavLink exact to={'/fetchdata'} activeClassName='active'>Documentation</NavLink>
+                            </li>
+                            <li>
+                                <NavLink exact to={'/'} activeClassName='active'>Blog</NavLink>
+                            </li>
                         </ul>
                     </div>
                 </div>

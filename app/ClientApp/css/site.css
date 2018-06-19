@@ -2,6 +2,15 @@
     padding: 0px;
 }
 
+/*
+    Override top navigation mid-width for extended menu (default is 750px)
+*/
+@media (min-width: 768px) and (max-width: 992px) {
+    .navbar-inverse .container {
+      width: 850px;
+    }
+}
+
 .navbar-inverse {
     background-color: #2C4770;
 }
