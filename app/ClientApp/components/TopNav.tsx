@@ -19,17 +19,17 @@ export class TopNav extends React.Component<{}, {}> {
               </div>
                     <div id="navbar3" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav navbar-right">
-                            <li className="active">
+                            <li>
                                 <NavLink exact to={'/'} activeClassName='active'>Home</NavLink>
                             </li>
                             <li>
-                                <NavLink exact to={'/counter'} activeClassName='active'>Analysis Builder</NavLink>
+                                <NavLink exact to={'/analysis'} activeClassName='active'>Analysis Builder</NavLink>
                             </li>
                             <li>
-                                <NavLink exact to={'/fetchdata'} activeClassName='active'>Documentation</NavLink>
+                                <NavLink exact to={'/docs'} activeClassName='active'>Documentation</NavLink>
                             </li>
                             <li>
-                                <NavLink exact to={'/'} activeClassName='active'>Blog</NavLink>
+                                <NavLink exact to={'/blog'} activeClassName='active'>Blog</NavLink>
                             </li>
                         </ul>
                     </div>

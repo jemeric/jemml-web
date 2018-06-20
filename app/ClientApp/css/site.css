@@ -1,10 +1,16 @@
 #react-app > .container-fluid {
-    padding: 0px;
+    padding: 0;
 }
 
-/*
-    Override top navigation mid-width for extended menu (default is 750px)
-*/
+/* Highlighting rules for nav menu items */
+.navbar-inverse li a.active,
+.navbar-inverse li a.active:hover,
+.navbar-inverse li a.active:focus {
+    background-color: #4f678c;
+    color: white;
+}
+
+/* Override top navigation mid-width for extended menu (default is 750px) */
 @media (min-width: 768px) and (max-width: 992px) {
     .navbar-inverse .container {
       width: 850px;
