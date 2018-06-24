@@ -1,14 +1,17 @@
+/* Bootstrap Overrides */
 #react-app > .container-fluid {
     padding: 0;
 }
 
 #react-app h1 {
     color: #132C54;
+    margin-bottom: 40px;
 }
 
 #react-app h2 {
     color: #4F678C;
     font-size: 22px;
+    margin-bottom: 30px;
 }
 
 /* Highlighting rules for nav menu items */
@@ -74,4 +77,13 @@
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #4f678c;
+}
+
+/* Custom Styles */
+#react-app form {
+    max-width: 770px;
+}
+
+#react-app .analysis-help {
+    margin: 20px 0 20px 0;
 }
