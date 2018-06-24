@@ -2,6 +2,15 @@
     padding: 0;
 }
 
+#react-app h1 {
+    color: #132C54;
+}
+
+#react-app h2 {
+    color: #4F678C;
+    font-size: 22px;
+}
+
 /* Highlighting rules for nav menu items */
 .navbar-inverse li a.active,
 .navbar-inverse li a.active:hover,

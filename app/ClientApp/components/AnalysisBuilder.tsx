@@ -2,6 +2,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 import { AnalysisFormState } from '../types/index';
+import AnalysisType from './AnalysisType';
 
 export default class AnalysisBuilder extends React.Component<RouteComponentProps<{}>, AnalysisFormState> {
     constructor(props: RouteComponentProps<{}>) {
@@ -12,17 +13,18 @@ export default class AnalysisBuilder extends React.Component<RouteComponentProps
     }
 
     public render() {
+        var step: JSX.Element = <AnalysisType />;
         switch (this.state.step) {
-            case 1:
-                return <div>Step 1</div>
             case 2:
-                return <div>Step 2</div>
+                step = <div>Step 2</div>;
+                break;
             case 3:
-                return <div>Step 3</div>
+                step = <div>Step 3</div>;
+                break;
         }
-        return <div>Default Step</div>
-/*        return <div>
-            <h1>Analysis Builder - Coming Soon!</h1>
-        </div>; */
+        return <div>
+            <h1>Analysis Builder</h1>
+            {step}
+        </div>;
     }
 }

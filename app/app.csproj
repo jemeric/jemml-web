@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\components\AnalysisBuilder.tsx" />
+    <None Remove="ClientApp\components\AnalysisType.tsx" />
     <None Remove="ClientApp\components\Blog.tsx" />
     <None Remove="ClientApp\components\Documentation.tsx" />
     <None Remove="ClientApp\components\file.tsx" />
@@ -31,6 +32,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\AnalysisBuilder.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AnalysisType.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Blog.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Documentation.tsx" />
     <TypeScriptCompile Include="ClientApp\components\TopNav.tsx" />
