@@ -84,6 +84,11 @@
     max-width: 770px;
 }
 
-#react-app .analysis-help {
+#react-app form .analysis-help {
     margin: 20px 0 20px 0;
+}
+
+#react-app form .btn {
+    width: 100px;
+    margin-left: 10px;
 }

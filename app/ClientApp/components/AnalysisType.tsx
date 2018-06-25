@@ -1,9 +1,23 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { AnalysisInitialFormData } from '../types/index';
 
-export default class AnalysisType extends React.Component<{}, {}> {
+export default class AnalysisType extends React.Component<AnalysisInitialFormData, {}> {
+    constructor(props: AnalysisInitialFormData) {
+        super(props);
+
+        // bind to make 'this' work in callback
+        this.next = this.next.bind(this);
+    }
+
     private changeAnalysisType(event: React.FormEvent<HTMLSelectElement>) {
         console.log("CHAGE EVENT: ", event.currentTarget.value);
+    }
+
+    private next(event: React.FormEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        console.log("Store and pass along state");
+        this.props.nextStep();
     }
 
     public render() {
@@ -28,7 +42,7 @@ export default class AnalysisType extends React.Component<{}, {}> {
                     The preprocessing will be applied to your dataset and returned in a format of your choosing.
                 </p>
             </div>
-            <button className="btn btn-default pull-right">Next Step</button>
+            <button className="btn btn-default pull-right" onClick={this.next}>Next</button>
         </form>;
     }
 }
