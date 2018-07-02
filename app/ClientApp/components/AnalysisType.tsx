@@ -1,13 +1,16 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { AnalysisInitialFormData } from '../types/index';
+import { AnalysisInitialFormData, AnalysisDataType } from '../types/index';
 
 export default class AnalysisType extends React.Component<AnalysisInitialFormData, {}> {
+    private typeSelect: HTMLSelectElement;
+
     constructor(props: AnalysisInitialFormData) {
         super(props);
 
         // bind to make 'this' work in callback
         this.next = this.next.bind(this);
+        this.changeAnalysisType = this.changeAnalysisType.bind(this);
     }
 
     private changeAnalysisType(event: React.FormEvent<HTMLSelectElement>) {
@@ -16,7 +19,8 @@ export default class AnalysisType extends React.Component<AnalysisInitialFormDat
 
     private next(event: React.FormEvent<HTMLButtonElement>) {
         event.preventDefault();
-        console.log("Store and pass along state");
+        console.log("Store and pass along state: ", this.typeSelect.value);
+        this.props.saveData(this.typeSelect.value as AnalysisDataType);
         this.props.nextStep();
     }
 
@@ -24,7 +28,7 @@ export default class AnalysisType extends React.Component<AnalysisInitialFormDat
         return <form>
             <h2>What sort of processing would you like to perform?</h2>
             <div className="form-group">
-                <select className="form-control" onChange={this.changeAnalysisType}>
+                <select className="form-control" ref={(ref) => this.typeSelect = ref!} onChange={this.changeAnalysisType}>
                     <option value="PREPROCESS_DATA">Preprocess Data</option>
                     <option value="CLASSIFY_DATA">Classify Data</option>
                     <option value="TRAIN_PREPROCESSOR">Train Preprocessor</option>
