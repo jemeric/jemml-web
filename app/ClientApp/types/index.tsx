@@ -8,6 +8,8 @@ export interface AnalysisInitialFormData {
     nextStep: () => void;
 }
 
-export interface AnalysisFormData extends AnalysisInitialFormData {
+export interface AnalysisFinalFormData {
     previousStep: () => void;
 }
+
+export interface AnalysisFormData extends AnalysisInitialFormData, AnalysisFinalFormData {}

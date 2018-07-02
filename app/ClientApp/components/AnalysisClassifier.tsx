@@ -2,7 +2,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { AnalysisFormData } from '../types/index';
 
-export default class AnalysisType extends React.Component<AnalysisFormData, {}> {
+export default class AnalysisClassifier extends React.Component<AnalysisFormData, {}> {
     constructor(props: AnalysisFormData) {
         super(props);
 
@@ -23,7 +23,7 @@ export default class AnalysisType extends React.Component<AnalysisFormData, {}> 
 
     public render() {
         return <form>
-            <h2>Choose the input you would like to preprocess</h2>
+            <h2>Choose your classifier</h2>
             <button className="btn btn-default pull-right" onClick={this.next}>Next</button>
             <button className="btn btn-default pull-right" onClick={this.previous}>Previous</button>
         </form>

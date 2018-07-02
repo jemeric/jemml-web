@@ -4,6 +4,9 @@ import Form from 'react-jsonschema-form';
 import { AnalysisFormState, AnalysisFormData } from '../types/index';
 import AnalysisType from './AnalysisType';
 import AnalysisInput from './AnalysisInput';
+import AnalysisPreprocessors from './AnalysisPreprocessors';
+import AnalysisClassifier from './AnalysisClassifier';
+import AnalysisOutput from './AnalysisOutput';
 
 export default class AnalysisBuilder extends React.Component<RouteComponentProps<{}>, AnalysisFormState> {
     constructor(props: RouteComponentProps<{}>) {
@@ -36,8 +39,13 @@ export default class AnalysisBuilder extends React.Component<RouteComponentProps
                 step = <AnalysisInput nextStep={this.nextStep} previousStep={this.previousStep} />;
                 break;
             case 3:
-                step = <div>Step 3</div>;
+                step = <AnalysisPreprocessors nextStep={this.nextStep} previousStep={this.previousStep} />;
                 break;
+            case 4:
+                step = <AnalysisClassifier nextStep={this.nextStep} previousStep={this.previousStep} />;
+                break;
+            case 5:
+                step = <AnalysisOutput previousStep={this.previousStep} />;
         }
         return <div>
             <h1>Analysis Builder</h1>
