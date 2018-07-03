@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Assets\Json\input-schema.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\components\AnalysisBuilder.tsx" />
     <None Remove="ClientApp\components\AnalysisClassifier.tsx" />
     <None Remove="ClientApp\components\AnalysisInput.tsx" />
@@ -32,6 +36,10 @@
     <None Remove="ClientApp\components\file.tsx" />
     <None Remove="ClientApp\components\TopNav.tsx" />
     <None Remove="ClientApp\types\index.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Json\input-schema.json" />
   </ItemGroup>
 
   <ItemGroup>

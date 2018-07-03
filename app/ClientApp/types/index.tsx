@@ -24,6 +24,12 @@ export interface AnalysisFormState extends ComponentState {
     type: AnalysisDataType;
 }
 
+export interface AnalysisSchemaFormState extends ComponentState {
+    error?: string;
+    isLoading: boolean;
+    schema?: {}
+}
+
 interface AnalysisFormPersist {
     saveData: (d: AnalysisData) => void;
 }

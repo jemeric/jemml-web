@@ -1,6 +1,5 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import Form from 'react-jsonschema-form';
 import { AnalysisFormState, AnalysisConfig, AnalysisFormData, AnalysisData, AnalysisDataType } from '../types/index';
 import AnalysisType from './AnalysisType';
 import AnalysisInput from './AnalysisInput';
