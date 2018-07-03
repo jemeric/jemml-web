@@ -13,10 +13,15 @@ export interface AnalysisInput {
     input: string
 }
 
-export type AnalysisData = AnalysisDataType  | AnalysisInput;
+export type AnalysisData = AnalysisDataType | AnalysisInput;
+
+export interface AnalysisConfig {
+    type: AnalysisDataType;
+}
 
 export interface AnalysisFormState extends ComponentState {
     step: number;
+    type: AnalysisDataType;
 }
 
 interface AnalysisFormPersist {
