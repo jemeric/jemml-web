@@ -80,15 +80,18 @@
 }
 
 /* Custom Styles */
-#react-app form {
+#react-app .form-step {
     max-width: 770px;
 }
 
-#react-app form .analysis-help {
+#react-app .form-step .analysis-help {
     margin: 20px 0 20px 0;
 }
 
-#react-app form .btn {
+#react-app .form-step .btn {
     width: 100px;
+}
+
+#react-app .form-step .btn:not(:last-child) {
     margin-left: 10px;
 }

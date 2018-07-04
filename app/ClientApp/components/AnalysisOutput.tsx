@@ -16,11 +16,11 @@ export default class AnalysisOutput extends React.Component<AnalysisFinalFormDat
     }
 
     public render() {
-        return <form>
+        return <form className="form-step">
             <h2>Choose your output format</h2>
-            <button className="btn btn-default">Restart</button>
             <button className="btn btn-primary pull-right">Download</button>
             <button className="btn btn-default pull-right" onClick={this.previous}>Previous</button>
+            <button className="btn btn-default">Restart</button>
         </form>
     }
 }

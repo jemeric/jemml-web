@@ -22,7 +22,7 @@ export default class AnalysisClassifier extends React.Component<AnalysisFormData
     }
 
     public render() {
-        return <form>
+        return <form className="form-step">
             <h2>Choose your classifier</h2>
             <button className="btn btn-default pull-right" onClick={this.next}>Next</button>
             <button className="btn btn-default pull-right" onClick={this.previous}>Previous</button>

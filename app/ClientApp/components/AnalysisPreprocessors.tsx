@@ -22,7 +22,7 @@ export default class AnalysisPreprocessors extends React.Component<AnalysisFormD
     }
 
     public render() {
-        return <form>
+        return <form className="form-step">
             <h2>Choose your preprocessors</h2>
             <button className="btn btn-default pull-right" onClick={this.next}>Next</button>
             <button className="btn btn-default pull-right" onClick={this.previous}>Previous</button>

@@ -26,8 +26,9 @@ export default class AnalysisType extends React.Component<AnalysisFormData, Anal
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    private next(event: React.FormEvent<HTMLButtonElement>) {
-        event.preventDefault();
+    private next(event: {}) {
+        //event.preventDefault();
+        console.log("event: ", event);
         this.props.nextStep();
     }
 
@@ -38,23 +39,39 @@ export default class AnalysisType extends React.Component<AnalysisFormData, Anal
 
     public render() {
         const { schema, isLoading, error } = this.state;
+        const log = (type: {}) => console.log.bind(console, type);
 
-        let form: JSX.Element = <div>Loading...</div>;
+        let buttons: JSX.Element = <div>
+            <button className="btn btn-default pull-right" type="submit">Next</button>
+            <button className="btn btn-default pull-right" type="button" onClick={this.previous}>Previous</button>
+        </div>
 
+        let form: JSX.Element = <div>
+            Loading...
+            {buttons}
+        </div>;
+        
         if (error) {
-            form = <div>{error}</div>;
+            form = <div>
+                {error}
+                {buttons}
+            </div>;
         }
 
         if (schema) {
             // TODO - setup schema form
             console.log("SCHEMA: ", schema);
+            form = <Form schema={schema}
+                onChange={log("changed")}
+                onSubmit={this.next}
+                onError={log("errors")}>
+                {buttons}
+            </Form>
         }
 
-        return <form>
+        return <div className="form-step">
             <h2>Choose the input you would like to preprocess</h2>
             {form}
-            <button className="btn btn-default pull-right" onClick={this.next}>Next</button>
-            <button className="btn btn-default pull-right" onClick={this.previous}>Previous</button>
-        </form>
+        </div>
     }
 }

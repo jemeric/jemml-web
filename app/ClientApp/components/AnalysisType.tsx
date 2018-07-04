@@ -25,7 +25,7 @@ export default class AnalysisType extends React.Component<AnalysisInitialFormDat
     }
 
     public render() {
-        return <form>
+        return <form className="form-step">
             <h2>What sort of processing would you like to perform?</h2>
             <div className="form-group">
                 <select className="form-control" ref={(ref) => this.typeSelect = ref!} onChange={this.changeAnalysisType}>
