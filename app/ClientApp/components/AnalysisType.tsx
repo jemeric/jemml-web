@@ -28,7 +28,7 @@ export default class AnalysisType extends React.Component<AnalysisInitialFormDat
         return <form className="form-step">
             <h2>What sort of processing would you like to perform?</h2>
             <div className="form-group">
-                <select className="form-control" ref={(ref) => this.typeSelect = ref!} onChange={this.changeAnalysisType}>
+                <select className="form-control" defaultValue={this.props.analysisType} ref={(ref) => this.typeSelect = ref!} onChange={this.changeAnalysisType}>
                     <option value="PREPROCESS_DATA">Preprocess Data</option>
                     <option value="CLASSIFY_DATA">Classify Data</option>
                     <option value="TRAIN_PREPROCESSOR">Train Preprocessor</option>

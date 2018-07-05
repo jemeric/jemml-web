@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { AnalysisFormState, AnalysisConfig, AnalysisFormData, AnalysisData, AnalysisDataType } from '../types/index';
+import { AnalysisBuilderFormState, AnalysisConfig, AnalysisFormData, AnalysisData, AnalysisDataType } from '../types/index';
 import AnalysisType from './AnalysisType';
 import AnalysisInput from './AnalysisInput';
 import AnalysisPreprocessors from './AnalysisPreprocessors';
@@ -9,7 +9,7 @@ import AnalysisOutput from './AnalysisOutput';
 
 const DEFAULT_TYPE: AnalysisDataType = AnalysisDataType.PreprocessData;
 
-export default class AnalysisBuilder extends React.Component<RouteComponentProps<{}>, AnalysisFormState> {
+export default class AnalysisBuilder extends React.Component<RouteComponentProps<{}>, AnalysisBuilderFormState> {
     private config: AnalysisConfig;
 
     constructor(props: RouteComponentProps<{}>) {
@@ -53,24 +53,24 @@ export default class AnalysisBuilder extends React.Component<RouteComponentProps
     }
 
     public render() {
-        let step: JSX.Element = <AnalysisType nextStep={this.nextStep} saveData={this.saveData} />;
         const { type } = this.state;
+        let step: JSX.Element = <AnalysisType analysisType={type} nextStep={this.nextStep} saveData={this.saveData} />;
         switch (this.state.step) {
             case 2:
-                step = <AnalysisInput nextStep={this.nextStep} previousStep={this.previousStep} saveData={this.saveData} />;
+                step = <AnalysisInput analysisType={type} nextStep={this.nextStep} previousStep={this.previousStep} saveData={this.saveData} />;
                 break;
             case 3:
-                step = <AnalysisPreprocessors nextStep={this.nextStep} previousStep={this.previousStep} saveData={this.saveData} />;
+                step = <AnalysisPreprocessors analysisType={type} nextStep={this.nextStep} previousStep={this.previousStep} saveData={this.saveData} />;
                 break;
             case 4:
                 if ([AnalysisDataType.ClassifyData, AnalysisDataType.TrainClassifier].indexOf(type) > 0) {
-                    step = <AnalysisClassifier nextStep={this.nextStep} previousStep={this.previousStep} saveData={this.saveData} />;
+                    step = <AnalysisClassifier analysisType={type} nextStep={this.nextStep} previousStep={this.previousStep} saveData={this.saveData} />;
                 } else {
-                    step = <AnalysisOutput previousStep={this.previousStep} saveData={this.saveData} />;
+                    step = <AnalysisOutput analysisType={type} previousStep={this.previousStep} saveData={this.saveData} />;
                 }
                 break;
             case 5:
-                step = <AnalysisOutput previousStep={this.previousStep} saveData={this.saveData} />;
+                step = <AnalysisOutput analysisType={type} previousStep={this.previousStep} saveData={this.saveData} />;
         }
         return <div>
             <h1>Analysis Builder</h1>

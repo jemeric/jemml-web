@@ -19,18 +19,26 @@ export interface AnalysisConfig {
     type: AnalysisDataType;
 }
 
-export interface AnalysisFormState extends ComponentState {
+export interface AnalysisBuilderFormState extends ComponentState {
     step: number;
     type: AnalysisDataType;
+}
+
+export interface BaseSchema {
+    title: string;
+    type: string;
+    properties: any;
+    definitions: {};
 }
 
 export interface AnalysisSchemaFormState extends ComponentState {
     error?: string;
     isLoading: boolean;
-    schema?: {}
+    schema?: BaseSchema;
 }
 
 interface AnalysisFormPersist {
+    analysisType: AnalysisDataType;
     saveData: (d: AnalysisData) => void;
 }
 

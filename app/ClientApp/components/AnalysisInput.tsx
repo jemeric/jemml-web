@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { AnalysisFormData, AnalysisSchemaFormState } from '../types/index';
+import { AnalysisFormData, AnalysisSchemaFormState, AnalysisDataType, BaseSchema } from '../types/index';
 import Form from 'react-jsonschema-form';
 import { fetch } from 'domain-task';
 
-export default class AnalysisType extends React.Component<AnalysisFormData, AnalysisSchemaFormState> {
+export default class AnalysisInput extends React.Component<AnalysisFormData, AnalysisSchemaFormState> {
     constructor(props: AnalysisFormData) {
         super(props);
 
@@ -37,6 +37,17 @@ export default class AnalysisType extends React.Component<AnalysisFormData, Anal
         this.props.previousStep();
     }
 
+    private static getInputSchemaForType(schema: BaseSchema, analysisType: AnalysisDataType): {} {
+        const { title, type, definitions, properties } = schema;
+        switch (analysisType) {
+            case AnalysisDataType.PreprocessData:
+            case AnalysisDataType.TrainPreprocessor:
+                return { title, type, properties: schema.properties.processorInput.properties, definitions };
+            default:
+                return { title, type, properties: schema.properties.input.properties, dependencies: schema.properties.input.dependencies, definitions };
+        }
+    }
+
     public render() {
         const { schema, isLoading, error } = this.state;
         const log = (type: {}) => console.log.bind(console, type);
@@ -60,8 +71,7 @@ export default class AnalysisType extends React.Component<AnalysisFormData, Anal
 
         if (schema) {
             // TODO - setup schema form
-            console.log("SCHEMA: ", schema);
-            form = <Form schema={schema}
+            form = <Form schema={AnalysisInput.getInputSchemaForType(schema, this.props.analysisType)}
                 onChange={log("changed")}
                 onSubmit={this.next}
                 onError={log("errors")}>
