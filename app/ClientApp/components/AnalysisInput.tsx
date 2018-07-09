@@ -2,6 +2,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { AnalysisFormData, AnalysisSchemaFormState, AnalysisDataType, BaseSchema } from '../types/index';
 import Form from 'react-jsonschema-form';
+import ForcedDefaultRadio from './ForcedDefaultRadio';
 import { fetch } from 'domain-task';
 
 export default class AnalysisInput extends React.Component<AnalysisFormData, AnalysisSchemaFormState> {
@@ -48,6 +49,18 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
         }
     }
 
+    private static getFormDefaults(analysisType: AnalysisDataType): {} {
+        switch (analysisType) {
+            case AnalysisDataType.PreprocessData:
+            case AnalysisDataType.TrainPreprocessor:
+                return {
+                    inputSet: { single: true }
+                };
+            default:
+                return { };
+        }
+    }
+
     public render() {
         const { schema, isLoading, error } = this.state;
         const log = (type: {}) => console.log.bind(console, type);
@@ -70,9 +83,31 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
         }
 
         if (schema) {
+            const uiSchema = {
+                inputSet: {
+                    single: {
+                        "ui:widget": "radio"
+                    },
+                    subset: {
+                        crossValidation: {
+                            "ui:widget": ForcedDefaultRadio
+                        }
+                    }
+                },
+                trainingInput: {
+                    subset: {
+                        crossValidation: {
+                            "ui:widget": ForcedDefaultRadio
+                        }
+                    }
+                }
+            };
+
             // TODO - setup schema form
             form = <Form schema={AnalysisInput.getInputSchemaForType(schema, this.props.analysisType)}
+                uiSchema={uiSchema}
                 onChange={log("changed")}
+                formData={AnalysisInput.getFormDefaults(this.props.analysisType)}
                 onSubmit={this.next}
                 onError={log("errors")}>
                 {buttons}

@@ -34,6 +34,7 @@
     <None Remove="ClientApp\components\Blog.tsx" />
     <None Remove="ClientApp\components\Documentation.tsx" />
     <None Remove="ClientApp\components\file.tsx" />
+    <None Remove="ClientApp\components\ForcedDefaultRadio.tsx" />
     <None Remove="ClientApp\components\TopNav.tsx" />
     <None Remove="ClientApp\types\index.tsx" />
   </ItemGroup>
@@ -51,6 +52,7 @@
     <TypeScriptCompile Include="ClientApp\components\AnalysisType.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Blog.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Documentation.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\ForcedDefaultRadio.tsx" />
     <TypeScriptCompile Include="ClientApp\components\TopNav.tsx" />
     <TypeScriptCompile Include="ClientApp\types\index.tsx" />
   </ItemGroup>
