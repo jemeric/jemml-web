@@ -4,6 +4,7 @@ import { AnalysisFormData, AnalysisSchemaFormState, AnalysisDataType, BaseSchema
 import Form from 'react-jsonschema-form';
 import ForcedDefaultRadio from './ForcedDefaultRadio';
 import { fetch } from 'domain-task';
+import { AjvError, ISubmitEvent } from 'react-jsonschema-form';
 
 export default class AnalysisInput extends React.Component<AnalysisFormData, AnalysisSchemaFormState> {
     constructor(props: AnalysisFormData) {
@@ -16,6 +17,7 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
         // bind to make 'this' work in callback
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
+        this.transformErrors = this.transformErrors.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +29,7 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    private next(event: {}) {
+    private next(event: ISubmitEvent<any>) {
         //event.preventDefault();
         console.log("event: ", event);
         this.props.nextStep();
@@ -49,7 +51,7 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
         }
     }
 
-    private static getFormDefaults(analysisType: AnalysisDataType): {} {
+    /*private static getFormDefaults(analysisType: AnalysisDataType): {} {
         switch (analysisType) {
             case AnalysisDataType.PreprocessData:
             case AnalysisDataType.TrainPreprocessor:
@@ -59,6 +61,14 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
             default:
                 return { };
         }
+    }*/
+
+    private transformErrors(errors: AjvError[]) {
+        console.log("ERRORS: ", errors);
+        const additionalProperties: AjvError[] = errors.filter(e => e.name == "additionalProperties");
+        // TODO - clear additional properties - investigate AJV removeAdditional
+        return [{ name: "pattern", property: ".file.filePath", message: "should match pattern", params: { pattern: "" }, stack: ".file.filePath should match pattern" }];
+        //return errors;
     }
 
     public render() {
@@ -107,8 +117,9 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
             form = <Form schema={AnalysisInput.getInputSchemaForType(schema, this.props.analysisType)}
                 uiSchema={uiSchema}
                 onChange={log("changed")}
-                formData={AnalysisInput.getFormDefaults(this.props.analysisType)}
+//                formData={AnalysisInput.getFormDefaults(this.props.analysisType)}
                 onSubmit={this.next}
+                transformErrors={this.transformErrors}
                 onError={log("errors")}>
                 {buttons}
             </Form>
