@@ -10,9 +10,10 @@ export default class CustomForm<T> extends Form<T> {
         console.log("this: ", this);
     }
 
-    onSubmit = (e: ISubmitEvent<T>) => {
+    onSubmit = (e: React.FormEvent<T>) => {
+        e.preventDefault();
         //super.onSubmit();
-        console.log("ON SUBMIT CALLED?");
+        console.log("ON SUBMIT CALLED?", e);
         // TODO validate with removeAdditional - pass along data having removed additional properties
         //this.props.onSubmit();
 
