@@ -2,6 +2,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { AnalysisFormData, AnalysisSchemaFormState, AnalysisDataType, BaseSchema } from '../types/index';
 import Form from 'react-jsonschema-form';
+import CustomForm from './CustomForm';
 import ForcedDefaultRadio from './ForcedDefaultRadio';
 import { fetch } from 'domain-task';
 import { AjvError, ISubmitEvent } from 'react-jsonschema-form';
@@ -114,7 +115,7 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
             };
 
             // TODO - setup schema form
-            form = <Form schema={AnalysisInput.getInputSchemaForType(schema, this.props.analysisType)}
+            form = <CustomForm schema={AnalysisInput.getInputSchemaForType(schema, this.props.analysisType)}
                 uiSchema={uiSchema}
                 onChange={log("changed")}
 //                formData={AnalysisInput.getFormDefaults(this.props.analysisType)}
@@ -122,7 +123,7 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
                 transformErrors={this.transformErrors}
                 onError={log("errors")}>
                 {buttons}
-            </Form>
+            </CustomForm>
         }
 
         return <div className="form-step">
