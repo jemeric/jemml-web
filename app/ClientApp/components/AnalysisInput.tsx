@@ -67,9 +67,9 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
     private transformErrors(errors: AjvError[]) {
         console.log("ERRORS: ", errors);
         const additionalProperties: AjvError[] = errors.filter(e => e.name == "additionalProperties");
-        // TODO - clear additional properties - investigate AJV removeAdditional
-        return [{ name: "pattern", property: ".file.filePath", message: "should match pattern", params: { pattern: "" }, stack: ".file.filePath should match pattern" }];
-        //return errors;
+        // TODO - cleanup errors
+        //return [{ name: "pattern", property: ".file.filePath", message: "should match pattern", params: { pattern: "" }, stack: ".file.filePath should match pattern" }];
+        return errors;
     }
 
     public render() {
