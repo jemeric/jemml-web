@@ -67,7 +67,7 @@ export default class AnalysisInput extends React.Component<AnalysisFormData, Ana
     private transformErrors(errors: AjvError[]) {
         console.log("ERRORS: ", errors);
         const additionalProperties: AjvError[] = errors.filter(e => e.name == "additionalProperties");
-        // TODO - cleanup errors
+        // TODO - cleanup errors - leave additional properties as those will get cleaned up anyway?
         //return [{ name: "pattern", property: ".file.filePath", message: "should match pattern", params: { pattern: "" }, stack: ".file.filePath should match pattern" }];
         return errors;
     }
