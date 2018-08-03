@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { AnalysisInitialFormData, AnalysisDataType } from '../types/index';
 
 export default class AnalysisType extends React.Component<AnalysisInitialFormData, {}> {
-    private typeSelect: HTMLSelectElement;
+    private typeSelect!: HTMLSelectElement;
 
     constructor(props: AnalysisInitialFormData) {
         super(props);

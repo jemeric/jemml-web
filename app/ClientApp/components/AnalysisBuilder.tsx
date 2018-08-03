@@ -10,7 +10,7 @@ import AnalysisOutput from './AnalysisOutput';
 const DEFAULT_TYPE: AnalysisDataType = AnalysisDataType.PreprocessData;
 
 export default class AnalysisBuilder extends React.Component<RouteComponentProps<{}>, AnalysisBuilderFormState> {
-    private config: AnalysisConfig;
+    private config!: AnalysisConfig;
 
     constructor(props: RouteComponentProps<{}>) {
         super(props);

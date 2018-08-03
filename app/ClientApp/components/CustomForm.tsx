@@ -2,21 +2,23 @@
 import Form from 'react-jsonschema-form';
 //import validateFormData from 'react-jsonschema-form';
 import { ISubmitEvent, FormProps, FormValidation, AjvError } from 'react-jsonschema-form';
+//import $RefParser from 'json-schema-ref-parser';
+//const $RefParser = require('json-schema-ref-parser');
+
 
 interface ValidationResult {
     errors: AjvError[];
     errorSchema: FormValidation;
 }
 
+//const refParser = new $RefParser();
+
 export default class CustomForm<T> extends Form<T> {
     private baseSubmit: (e: React.FormEvent<T>) => {};
     private validate: (formData: T, schema: {}) => ValidationResult;
     constructor(props: FormProps<T>) {
         super(props);
-        console.log("SUPER PROPS: ", props);
-        console.log("this: ", this);
         const self: any = this;
-        console.log("submit old: ", self.onSubmit);
         this.baseSubmit = self.onSubmit;
         self.onSubmit = this.submit.bind(this);
         const base: any = Form.prototype;
@@ -28,6 +30,8 @@ export default class CustomForm<T> extends Form<T> {
         if (!prop) {
             return data;
         }
+        console.log("data: ", data);
+        console.log("prop: ", prop);
         if (path.length < 1) {
             delete data[prop];
         } else {
@@ -58,6 +62,76 @@ export default class CustomForm<T> extends Form<T> {
             this.deleteProperty(formData, this.jsonPathFromString(path));
         }
     }
+    
+    private hasSchemaProperty(schema: any, path: string[]): boolean {
+        if (path.length < 1) {
+            return typeof schema != "undefined";
+        }
+        const prop = path.shift();
+        if (!prop) {
+            return false;
+        }
+        if (schema["type"] == "array") {
+            return this.hasSchemaProperty(schema["items"]["properties"][prop], path);
+        }
+        return this.hasSchemaProperty(schema["properties"][prop], path);
+    }
+
+    private allowsAdditionalProperties(schema: any, path: string[]): boolean {
+        if (path.length < 1) {
+            if (typeof schema["additionalProperties"] == "boolean") {
+                return schema["additionalProperties"] as boolean;
+            }
+            return false;
+        }
+        const prop = path.shift();
+        if (!prop) {
+            return false;
+        }
+        if (schema["type"] == "array") {
+            return this.allowsAdditionalProperties(schema["items"]["properties"][prop], path);
+        }
+        return this.allowsAdditionalProperties(schema["properties"][prop], path);
+    }
+
+    private findAdditionalProperties(data: any, dereferencedSchema: {}, path : string[] = []): string[] {
+        let additionalProperties: string[] = [];
+        const checkAdditional = !this.allowsAdditionalProperties(dereferencedSchema, path);
+        for (let prop in data) {
+            if (!data.hasOwnProperty(prop)) {
+                continue;
+            }
+            if (Array.isArray(data[prop])) {
+                // traverse array
+                const propArray = data[prop] as any[];
+                for (let i = 0; i < propArray.length; i++) {
+                    additionalProperties.concat(this.findAdditionalProperties(data[prop][i], dereferencedSchema, path.concat(prop).concat(i.toString())));
+                }
+            } else {
+                // check if property is an additional property
+                const propPath = path.concat(prop);
+                if (checkAdditional && !this.hasSchemaProperty(dereferencedSchema, propPath)) {
+                    additionalProperties.push(propPath.join("."));
+                }
+                additionalProperties.concat(this.findAdditionalProperties(data[prop], dereferencedSchema, path.concat(prop)));
+            }
+        }
+        return additionalProperties;
+    }
+
+    /*private async replaceReferences(schema: any): Promise<{}> {
+        let references = await refParser.dereference(schema);
+        return references;
+    } */
+
+    private replaceDependencies(schema: any, data: any): {} {
+
+        return {};
+    }
+
+    /*private dereference(schema: {}, data: any): {} {
+        return this.replaceDependencies(this.replaceReferences(schema), data);
+    }*/
 
     private submit(e: React.FormEvent<T>) {
         e.preventDefault();

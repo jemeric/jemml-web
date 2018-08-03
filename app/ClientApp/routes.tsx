@@ -8,7 +8,7 @@ import Blog from './components/Blog';
 
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
-    <Route path='/docs' component={ Documentation } />
-    <Route path='/analysis' component={ AnalysisBuilder } />
+    <Route path='/docs' component={Documentation} />
+    <Route path='/analysis' component={AnalysisBuilder} />
     <Route path='/blog' component={ Blog } />
 </Layout>;

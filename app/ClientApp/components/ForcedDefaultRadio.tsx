@@ -17,7 +17,7 @@ export default class ForcedDefaultRadio extends React.Component<WidgetProps> {
         }
     }
 
-    private fieldChanged(event: React.FormEvent<HTMLButtonElement>) {
+    private fieldChanged(event: React.FormEvent<HTMLInputElement>) {
         this.props.onChange(event.currentTarget.value === "true");
     }
 
